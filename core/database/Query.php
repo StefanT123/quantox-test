@@ -100,7 +100,7 @@ class Query
      *
      * @param  string $table
      * @param  array  $parameters
-     * @return void
+     * @return bool
      */
     public function insert(string $table, array $parameters)
     {
@@ -111,7 +111,7 @@ class Query
             ':' . implode(', :', array_keys($parameters))
         );
 
-        $this->execute($sql, $parameters);
+        return $this->execute($sql, $parameters);
     }
 
     /**

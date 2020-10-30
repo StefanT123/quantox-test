@@ -7,7 +7,7 @@ class Student extends Model
     protected $table = 'students';
 
     protected $fields = [
-        'name',
+        'name', 'school_board_id',
     ];
 
     protected $relations = [

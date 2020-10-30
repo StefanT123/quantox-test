@@ -26,4 +26,14 @@ class Request
     {
         return $_SERVER['REQUEST_METHOD'];
     }
+
+    /**
+     * Get all fields sent via POST.
+     *
+     * @return array
+     */
+    public static function postFields()
+    {
+        return $_POST;
+    }
 }

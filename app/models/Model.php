@@ -21,6 +21,16 @@ abstract class Model
     }
 
     /**
+     * Get models table fields.
+     *
+     * @return array
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    /**
      * Get relation for model
      *
      * @param  string $key
