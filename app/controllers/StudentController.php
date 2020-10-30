@@ -12,7 +12,7 @@ class StudentController
 {
     public function index()
     {
-        $repo = new StudentRepository(new Student);
+        $repo = StudentRepository::for(new Student);
         $students = $repo
             ->withRelation('school_boards')
             ->all('students.*, school_boards.name as school_name')
@@ -23,18 +23,20 @@ class StudentController
 
     public function create()
     {
-        $schoolBoards = (new SchoolBoardRepository(new SchoolBoard))
+        $schoolBoards = SchoolBoardRepository::for(new SchoolBoard)
             ->all()
             ->get();
 
-        return view('student/create', ['schoolBoards' => $schoolBoards]);
+        return view('student/create', [
+            'schoolBoards' => $schoolBoards,
+        ]);
     }
 
     public function store()
     {
         $fields = Request::postFields();
 
-        $repo = new StudentRepository(new Student);
+        $repo = StudentRepository::for(new Student);
 
         if ($repo->insert($fields)) {
             redirect('students');

@@ -36,4 +36,14 @@ class Request
     {
         return $_POST;
     }
+
+    /**
+     * Get all fields sent via GET.
+     *
+     * @return array
+     */
+    public static function getFields()
+    {
+        return $_GET;
+    }
 }

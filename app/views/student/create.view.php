@@ -9,6 +9,7 @@
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" name="name" id="name" required>
               </div>
+
               <div class="form-group">
                 <label for="school_board">Select school board</label>
                 <select class="form-control" name="school_board_id" id="school_board">

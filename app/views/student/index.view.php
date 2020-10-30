@@ -13,6 +13,7 @@
                   <th scope="col">ID</th>
                   <th scope="col">Name</th>
                   <th scope="col">School Board</th>
+                  <th colspan="2">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -21,6 +22,10 @@
                   <th scope="row"><?= $student->id ?></th>
                   <td><?= $student->name ?></td>
                   <td><?= $student->school_name ?></td>
+                  <td>
+                    <a href="/student/grade/create?id=<?= $student->id ?>" class="btn btn-primary">Insert grade</a>
+                    <a href="/student/course/add?studentId=<?= $student->id ?>" class="btn btn-primary">Add course</a>
+                  </td>
                 </tr>
                 <?php endforeach ?>
               </tbody>

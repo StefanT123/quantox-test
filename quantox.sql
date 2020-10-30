@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 30, 2020 at 10:20 AM
+-- Generation Time: Oct 30, 2020 at 02:28 PM
 -- Server version: 10.4.12-MariaDB-1:10.4.12+maria~disco-log
 -- PHP Version: 7.4.8
 
@@ -31,6 +31,16 @@ CREATE TABLE `courses` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`) VALUES
+(4, 'Functional Programming'),
+(3, 'OOP'),
+(1, 'PHP'),
+(2, 'SQL');
 
 -- --------------------------------------------------------
 
@@ -135,7 +145,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `grades`
@@ -153,7 +163,7 @@ ALTER TABLE `school_boards`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

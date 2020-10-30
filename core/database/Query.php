@@ -57,6 +57,13 @@ class Query
         return $this;
     }
 
+    public function find(string $table, int $id, string $fields = '*')
+    {
+        $this->sql .= "SELECT {$fields} FROM {$table} WHERE id = :id";
+
+        return $this;
+    }
+
     /**
      * Join two tables based on some condition.
      *
@@ -73,26 +80,35 @@ class Query
     }
 
     /**
-     * Fetch data based on the given query.
+     * Fetch all data based on the given query.
      *
      * @param  array  $params
      * @return array
      */
     public function get(array $params = [])
     {
-        $sql = $this->sql;
-
-        if ($this->joinSql !== '') {
-            $sql .= $this->joinSql;
-        }
-
-        if ($this->whereSql !== '') {
-            $sql .= $this->whereSql;
-        }
-
+        $sql = $this->setQuery();
         $stmt = $this->execute($sql, $params);
 
+        $this->resetQueries();
+
         return $stmt->fetchAll();
+    }
+
+    /**
+     * Fetch data based on the given query.
+     *
+     * @param  array  $params
+     * @return object
+     */
+    public function getOne(array $params = [])
+    {
+        $sql = $this->setQuery();
+        $stmt = $this->execute($sql, $params);
+
+        $this->resetQueries();
+
+        return $stmt->fetch();
     }
 
     /**
@@ -133,5 +149,31 @@ class Query
         } catch (\PDOException $e) {
             die($e->getMessage());
         }
+    }
+
+    /**
+     * Set sql query.
+     *
+     * @return string
+     */
+    protected function setQuery()
+    {
+        $sql = $this->sql;
+        $sql .= $this->joinSql;
+        $sql .= $this->whereSql;
+
+        return $sql;
+    }
+
+    /**
+     * Reset query fields.
+     *
+     * @return void
+     */
+    protected function resetQueries()
+    {
+        $this->sql = '';
+        $this->joinSql = '';
+        $this->whereSql = '';
     }
 }
