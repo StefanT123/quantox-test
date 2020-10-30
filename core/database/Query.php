@@ -4,23 +4,23 @@ namespace App\Core\Database;
 
 use PDO;
 
-class QueryBuilder
+class Query
 {
     /**
      * Object of PDO class.
      *
      * @var PDO
      */
-    protected $db;
+    protected $pdo;
 
     /**
      * Initialize this class with PDO object.
      *
      * @param PDO $pdo
      */
-    public function __construct(PDO $db)
+    public function __construct(PDO $pdo)
     {
-        $this->db = $db;
+        $this->pdo = $pdo;
     }
 
     /**
@@ -54,7 +54,7 @@ class QueryBuilder
             ':' . implode(', :', array_keys($parameters))
         );
 
-        $this->executePreparedSql($sql, $parameters);
+        $this->execute($sql, $parameters);
     }
 
     /**
@@ -62,15 +62,17 @@ class QueryBuilder
      *
      * @param  string $sql
      * @param  array  $parameters
-     * @return void
+     * @return PDOStatement
      *
      * @throws \PDOException
      */
-    protected function executePreparedSql(string $sql, array $parameters)
+    public function execute(string $sql, array $parameters = [])
     {
         try {
             $statement = $this->pdo->prepare($sql);
             $statement->execute($parameters);
+
+            return $statement;
         } catch (\PDOException $e) {
             die($e->getMessage());
         }
